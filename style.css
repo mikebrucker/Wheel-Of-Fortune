@@ -2,19 +2,27 @@
     box-sizing: border-box;
 }
 
-body{
+html {
+    background-color: black;
+}
+
+body {
+    background: url(images/pool.jpg) no-repeat fixed top;
+    background-size: 100%;
     width: 100%;
     margin: 0 auto;
-    background: radial-gradient(cyan, turquoise, teal);
-    font-size: 88px;
+    font-size: 72px;
+    text-align: center;
+    font-family: Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+}
+
+.container {
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 33%, cyan);
 }
 
 .logo {
     width: 80%;
-}
-
-.logo {
-    opacity: 0.5;
+    opacity: 0.4;
     position: absolute;
     top: 0;
     left: 0;
@@ -23,53 +31,146 @@ body{
     margin: auto;
 }
 
-body, input {
-    text-align: center;
+.block, .corner, .row, #begin, #spin, #points, #pointsTotal {
+    display: inline-block;
 }
 
-.container {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+.block, .corner, #begin:active, #spin:active {
+    position: relative;
+}
+
+.corner {
+    margin: 0;
+    width: 89px;
+    height: 110px;
+}
+
+.align {
+    transform: scaleX(0.8);
+    font-weight: bold;
+    margin: auto;
 }
 
 .block {
-    position: relative;
-    display: inline-block;
-    width: 100px;
-    height: 100px;
-    border: 6px outset silver;
+    width: 75px;
+    height: 96px;
+    margin: 0 2px;
+    line-height: 88px;
+    border: 5px outset rgb(24, 24, 24);
     background: radial-gradient(circle, lime, darkgreen);
-    margin: 0;
+}
+
+.block, .align, .corner {
+    vertical-align: middle;
+}
+
+#blockTopLeft, #blockTopRight {
+    border-bottom: 10px solid cyan;
+    vertical-align: bottom;
+}
+#blockBottomRight, #blockBottomLeft {
+    border-top: 10px solid cyan;
     vertical-align: top;
-    font-family: Helvetica, Arial, sans-serif;
+
+}
+#blockTopRight, #blockBottomRight {
+    border-left: 10px solid cyan;
+}
+#blockBottomLeft, #blockTopLeft {
+    border-right: 10px solid cyan;
 }
 
-.block div {
-    display: inline-block;
+.row {
+    background-color: darkgreen;
+}
+#row1 {
+    border-top: 10px solid cyan;
+}
+#row2 {
+    border-left: 10px solid cyan;
+    border-right: 10px solid cyan;
+    padding-bottom: 2px;
+}
+#row3 {
+    border-left: 10px solid cyan;
+    border-right: 10px solid cyan;
+    padding-top: 2px;
+}
+#row4 {
+    border-bottom: 10px solid cyan;
+}
+#row1, #row2 {
+    padding-top: 4px;
+    vertical-align: text-bottom;
+}
+#row3, #row4 {
+    padding-bottom: 4px;
+    vertical-align: top;
+}
+#block0, #block12, #block26, #block40 {
+    margin-left: 4px;
+}
+#block11, #block25, #block39, #block51 {
+    margin-right: 4px;
 }
 
-.input, .modal, .newLine {
+.input, .modal, .newLine, .mainImage {
     display: block;
 }
 
-.newLine {
-    border-image-width: 0;
+.input, .modal {
+    max-width: 1130px;
+    margin: 10px auto 0;
+    padding: 20px 0;
+    background: radial-gradient(rgba(0, 0, 0, 0), forestgreen);
+    color: rgb(255, 190, 55);
+    text-shadow: -10px 10px 20px black;
+    border: 10px solid cyan;
+    border-radius: 8px;
+    font-weight: 900;
 }
 
-input {
-    margin: 30px;
-    width: 600px;
-    height: 90px;
-    font-size: 60px;
-    outline: none;
-    border: 6px solid forestgreen;
-    background: radial-gradient(yellow, gold, goldenrod);
-    border-radius: 12px;
+#begin, #spin, #points {
+    color: forestgreen;
+    background-color: rgb(255, 190, 55);
+    border: 20px solid rgb(255, 190, 55);
 }
 
-#modal {
-    margin: 0 auto;
-    top: 150px;
+#begin, #spin, #points, #pointsTotal {
+    margin: 10px auto;
+    border-radius: 8px;
+    text-shadow: none;
+}
+
+#begin:active, #spin:active {
+    top: 2px;
+    left: 2px;
+    border-bottom: 18px solid rgb(255, 190, 55);
+    border-right: 18px solid rgb(255, 190, 55);
+    margin: 10px auto 12px;
+}
+
+.mainImage {
+    margin: 0 auto 10px;
+}
+
+#points, #pointsTotal {
+    position: fixed;
+    top: 0;
+    z-index: 2;
+}
+
+#points {
+    left: 0;
+    margin-left: 10px;
+    min-width: 240px;
+}
+
+#pointsTotal {
+    right: 0;
+    margin-right: 10px;
+    background-color: forestgreen;
+    border: 20px solid forestgreen;
+    color: rgb(255, 190, 55);
+    min-width: 275px;
 }
