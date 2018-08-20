@@ -81,8 +81,11 @@ function startgame(letter) {
         for (var i = 0; i < gameWord.length; i++) {
             if (gameWord[i] === letter) {
                 $('#block' + i).html("<div>" + gameWord[i] + "</div>");
-                // $('#block' + i).css({"background": 'radial-gradient(circle, white, whitesmoke, lightgray)'});
-                roundComplete[i] = 1;
+                if (gameWord[i] === ' ') {
+                    $('#block' + i).css({"background": "radial-gradient(circle, lime, darkgreen)"});
+                    $('#block' + i).html("<img class='logo' src='images/logo.png' />");
+                }
+            roundComplete[i] = 1;
             }
         }
     }
