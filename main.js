@@ -6,13 +6,16 @@ var words = [['  HYPERTEXT     MARKUP       LANGUAGE', 'Code'],
              ['             GET ELEMENT      BY ID', 'Code'],
              ['              DONUT SHOP      COFFEE', 'Food and Drink'],
              ['             CRAB BISQUE', 'Food and Drink'],
+             ['             KANSAS CITY  STYLE BARBECUE', 'Food and Drink'],
              ['              GUTE NACHT', 'Non-English Phrase'],
              [' THAT RUG     REALLY TIED   THE ROOM      TOGETHER', 'Movie Quote'],
              ['   I COME        FROM         A LAND     DOWN UNDER', 'Music'],
              ['  BETWEEN     THE BURIED     AND ME', 'Music'],
+             ['  SUMMER       SLAUGHTER     FESTIVAL', 'Music'],
              ['              INNSBRUCK      AUSTRIA', 'Geography'],
              ['             PHILADELPHIA  PENNSYLVANIA', 'Geography'],
-             [' SUPER BOWL  LII CHAMPIONS PHILADELPHIA  EAGLES', 'Sports']
+             [' SUPER BOWL  LII CHAMPIONS PHILADELPHIA  EAGLES', 'Sports'],
+             [' WASHINGTON   CAPITAL       ALEXANDER    OVECHKIN', 'Sports']
             ];
 //             _1234567890_/+1234567890+\/+1234567890+\_1234567890_
 var letter;
@@ -23,9 +26,9 @@ var points = 0;
 var pointsTotal = 0;
 var bank = 0;
 var wrongGuesses = 0;
-var possiblePoints = [100, 100, 100, 100, 100, 200, 200, 200, 200, 200, 300, 300, 300, 300, 300, 400, 400, 400, 400, 500, 500, 500, 500, 600, 600, 600, 600, 700, 700, 700, 800, 800, 800, 900, 900, 1000, 1000, 1500, 2000, 'BANKRUPT'];
 var roundComplete = [];
 var gameWord = [];
+var possiblePoints = [100, 100, 100, 100, 100, 200, 200, 200, 200, 200, 300, 300, 300, 300, 300, 400, 400, 400, 400, 500, 500, 500, 500, 600, 600, 600, 600, 700, 700, 700, 800, 800, 800, 900, 900, 1000, 1000, 1500, 2000, 'BANKRUPT'];
 var guess = false;
 var beginBoo = true;
 var spinBoo = false;
@@ -38,13 +41,14 @@ function gameOrder() {
     for (var i = 0; i < numberOfAnswers; i++) {
         var x = Math.floor(Math.random() * array.length);
         uniqueGameOrder.push(array[x]);
+        console.log('Puzzle ' + (i + 1) + ': ' + array[x][0].trim())
         array.splice(x, 1);
     }
     words = uniqueGameOrder;
 }
 
 gameOrder();
-console.log(words);
+
 $('.modal').hide();
 $('.game').hide();
 $('#spin').hide();
@@ -188,14 +192,6 @@ document.addEventListener('keypress', function (event) {
     }
 });
 
-function changeBoardBlock(funcGameWord, j) {
-    $('#block' + j).css({"background": "blue"});
-    setTimeout(function() {
-        $('#block' + j).html("<div class='align'>" + funcGameWord[j] + "</div>");
-        $('#block' + j).css({"background": 'radial-gradient(circle, white, whitesmoke, lightgray)'});
-    }, 1000);
-}
-
 function startgame(letter) {
     wrongGuess = true;
     if (gameWord.includes(letter)) {
@@ -221,7 +217,7 @@ function startgame(letter) {
         }
     }
     guess = false;
-    if ((goToNextRound != gameWord.length) && (wrongGuesses < 3)) {
+    if ((goToNextRound != gameWord.length) && (wrongGuesses < 10)) {
         setTimeout(function() {
             $('#input').fadeOut();
             setTimeout(function() {
@@ -232,11 +228,19 @@ function startgame(letter) {
             }, 400);
         }, 400);
     }
-    if (wrongGuesses > 2) {
+    if (wrongGuesses > 9) {
         setTimeout(function() {
             loser();
         }, 1000);
     }
+}
+
+function changeBoardBlock(funcGameWord, j) {
+    $('#block' + j).css({"background": "blue"});
+    setTimeout(function() {
+        $('#block' + j).html("<div class='align'>" + funcGameWord[j] + "</div>");
+        $('#block' + j).css({"background": 'radial-gradient(circle, white, whitesmoke, lightgray)'});
+    }, 1000);
 }
 
 function nextRound() {
