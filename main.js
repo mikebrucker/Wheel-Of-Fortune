@@ -13,16 +13,15 @@ var words = ['  HYPERTEXT     MARKUP       LANGUAGE',
 var letter;
 var game = 0;
 var goToNextRound = 0;
+var score = 0;
+var points = 0;
+var pointsTotal = 0;
+var possiblePoints = [100, 100, 100, 100, 100, 200, 200, 200, 200, 200, 300, 300, 300, 300, 300, 400, 400, 400, 400, 500, 500, 500, 500, 600, 600, 600, 600, 700, 700, 700, 800, 800, 800, 900, 900, 1000, 1000, 1500, 2000, 'BANKRUPT'];
 var roundComplete = [];
 var gameWord = [];
 var guess = false;
 var beginBoo = true;
 var spinBoo = false;
-var score = 0;
-var points = 0;
-var pointsTotal = 0;
-var possiblePoints = [100, 100, 100, 100, 100, 200, 200, 200, 200, 200, 300, 300, 300, 300, 300, 400, 400, 400, 400, 500, 500, 500, 500, 600, 600, 600, 600, 700, 700, 700, 800, 800, 800, 900, 900, 1000, 1000, 1500, 2000, 'BANKRUPT'];
-console.log(possiblePoints.length);
 
 $('.modal').hide();
 $('.game').hide();
@@ -159,10 +158,10 @@ function startgame(letter) {
             setTimeout(function() {
                 setTimeout(function() {
                     spinBoo = true;
-                }, 500);
+                }, 400);
                 $('#spin').fadeIn();
-            }, 500);
-        }, 500);
+            }, 400);
+        }, 400);
     }
 }
 
@@ -200,3 +199,11 @@ $(window).resize(function() {
 })
 
 heightContainer();
+
+
+setInterval(function(){
+    var date = new Date();
+    var sec = date.getSeconds();
+    var mil = date.getMilliseconds();
+    $('.container').css({"background": "linear-gradient(to bottom, rgba(0, 0, 0, 0) 33%, hsl(" + ((sec + (0.001 * mil)) * 6) + ", 100%, 50%)"});
+}, 100);
