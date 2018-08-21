@@ -11,9 +11,13 @@ body {
     background-size: 100%;
     width: 100%;
     margin: 0 auto;
-    font-size: 72px;
+    font-size: 66px;
     text-align: center;
     font-family: Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+}
+
+.info {
+    font-size: 32px;
 }
 
 .container {
@@ -71,7 +75,7 @@ body {
 #blockBottomRight, #blockBottomLeft {
     border-top: 10px solid cyan;
     vertical-align: top;
-
+    
 }
 #blockTopRight, #blockBottomRight {
     border-left: 10px solid cyan;
@@ -82,6 +86,7 @@ body {
 
 .row {
     background-color: darkgreen;
+    font-size: 80px;
 }
 #row1 {
     border-top: 10px solid cyan;
@@ -114,31 +119,52 @@ body {
     margin-right: 4px;
 }
 
+.modal {
+    margin: 10px auto 0;
+    padding: 20px 0;
+}
+
+.modal div {
+    margin: 10px auto;
+}
+
 .input, .modal, .newLine, .mainImage {
     display: block;
 }
 
-.input, .modal {
-    max-width: 1130px;
-    margin: 10px auto 0;
-    padding: 20px 0;
-    background: radial-gradient(rgba(0, 0, 0, 0), forestgreen);
+.input, .modal, #description {
+    border: 10px solid cyan;
+}
+
+.input, .modal, #description {
+    max-width: 972px;
     color: rgb(255, 190, 55);
     text-shadow: -10px 10px 20px black;
-    border: 10px solid cyan;
-    border-radius: 8px;
     font-weight: 900;
+    background: radial-gradient(rgba(0, 0, 0, 0), forestgreen);
 }
 
-#begin, #spin, #points {
+.modal, #begin, #spin, #points, #pointsTotal, #bank, #gameCounter {
+    border-radius: 8px;
+}
+
+#description, .input {
+    margin: 0 auto;
+    padding: 10px 0;
+    font-size: 56px;
+    border-top: none;
+}
+
+#begin, #spin, #points, #bank {
     color: forestgreen;
     background-color: rgb(255, 190, 55);
-    border: 20px solid rgb(255, 190, 55);
+}
+#begin, #spin, #points, #gameCounter {
+    border: 16px solid rgb(255, 190, 55);
 }
 
-#begin, #spin, #points, #pointsTotal {
-    margin: 10px auto;
-    border-radius: 8px;
+#begin, #spin, #points, #pointsTotal, #bank, #gameCounter {
+    margin: 10px auto 0;
     text-shadow: none;
 }
 
@@ -147,30 +173,43 @@ body {
     left: 2px;
     border-bottom: 18px solid rgb(255, 190, 55);
     border-right: 18px solid rgb(255, 190, 55);
-    margin: 10px auto 12px;
+    margin: 10px auto -2px;
 }
 
 .mainImage {
+    height: 114px;
     margin: 0 auto 10px;
 }
 
-#points, #pointsTotal {
+#points, #pointsTotal, #bank, #gameCounter {
     position: fixed;
     top: 0;
     z-index: 2;
+    min-width: 290px;
 }
 
-#points {
+#points, #gameCounter {
     left: 0;
     margin-left: 10px;
-    min-width: 240px;
 }
 
-#pointsTotal {
+#pointsTotal, #gameCounter {
+    background-color: forestgreen;
+    color: rgb(255, 190, 55);
+}
+
+#pointsTotal, #bank {
     right: 0;
     margin-right: 10px;
-    background-color: forestgreen;
-    border: 20px solid forestgreen;
-    color: rgb(255, 190, 55);
-    min-width: 275px;
+    border: 16px solid forestgreen;
+}
+
+#bank, #gameCounter {
+    display: none;
+}
+
+#gameCounter {
+    font-size: 28px;
+    /* line-height: 28px; */
+    padding: 5px 0;
 }
