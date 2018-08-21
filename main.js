@@ -212,6 +212,7 @@ function startgame(letter) {
     if (wrongGuess) {
         wrongGuesses++;
     }
+    $('#gameCounter').html('<div>Game ' + (game + 1) + '</div><div>Wrong Guesses ' + wrongGuesses + '</div>');
     goToNextRound = 0;
     for (var i = 0; i < gameWord.length; i++) {
         goToNextRound += roundComplete[i];
@@ -252,7 +253,7 @@ function nextRound() {
         goToNextRound = 0;
         roundComplete = [];
         game++;
-        $('#gameCounter').html('Game ' + (game + 1));
+        $('#gameCounter').html('<div>Game ' + (game + 1) + '</div><div>Wrong Guesses 0</div>');
         if (game > 9) {
             winner();
         } else {
