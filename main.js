@@ -1,5 +1,5 @@
 //            _1234567890_/+1234567890+\/+1234567890+\-_1234567890_
-var words = [' HYPERTEXT      MARKUP       LANGUAGE',
+var words = ['  HYPERTEXT     MARKUP       LANGUAGE',
              '              CASCADING     STYLE SHEET',
              '              DONUT SHOP      COFFEE',
              ' RECURSION     RECURSION    RECURSION     RECURSION',
@@ -35,6 +35,7 @@ setTimeout(function() {
 }, 401);
 
 function message() {
+    spinBoo = false;
     setTimeout(function() {
         beginBoo = true;
         $('.modal').fadeIn();
@@ -45,7 +46,6 @@ function message() {
     for (var i = 0; i < words[game].length; i++) {
         roundComplete.push(0);
     }
-    spinBoo = false;
 }
 
 function winner() {
@@ -153,20 +153,21 @@ function startgame(letter) {
         }
     }
     guess = false;
-    setTimeout(function() {
-        $('#input').fadeOut();
+    if (goToNextRound != gameWord.length) {
         setTimeout(function() {
+            $('#input').fadeOut();
             setTimeout(function() {
-                spinBoo = true;
+                setTimeout(function() {
+                    spinBoo = true;
+                }, 500);
+                $('#spin').fadeIn();
             }, 500);
-            $('#spin').fadeIn();
         }, 500);
-    }, 500);
+    }
 }
 
 function nextRound() {
     setTimeout(function() {
-        $('#spin').fadeOut();
         $('.game').fadeOut();
         for (var i = 0; i < words[game].length; i++) {
             $('#block' + i).html("<img class='logo' src='images/logo.png' />");
