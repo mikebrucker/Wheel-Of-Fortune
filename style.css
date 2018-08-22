@@ -16,6 +16,11 @@ body {
     font-family: Haettenschweiler, 'Arial Narrow Bold', sans-serif;
 }
 
+#round {
+    font-size: 52px;
+}
+
+
 .info {
     font-size: 32px;
 }

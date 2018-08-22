@@ -33,6 +33,7 @@ var guess = false;
 var beginBoo = true;
 var spinBoo = false;
 var wrongGuess = false;
+var newGame = false;
 
 function gameOrder() {
     var numberOfAnswers = words.length;
@@ -74,12 +75,6 @@ function message() {
 }
 
 function winner() {
-    for (var i = 0; i < words[game][0].length; i++) {
-        $('#block' + i).html("<img class='logo' src='images/logo.png' />");
-        $('#block' + i).css({"background": "radial-gradient(circle, lime, darkgreen)"});
-    }
-    gameOrder();
-    wrongGuesses = 0;
     setTimeout(function() {
         game = 0;
         beginBoo = true;
@@ -88,37 +83,46 @@ function winner() {
     $('#message').html("You Win Wheel of JavaScript!");
     $('#round').html("You Won $" + bank + "!<div>Would You Like To Play Again?</div>");
     $('#input').html("Enter Any Key To Guess");
+    $('#gameCounter').html('<div>Game ' + game + '</div><div>Wrong Guesses ' + wrongGuesses + '</div>');
     for (var i = 0; i < words[game][0].length; i++) {
         roundComplete.push(0);
     }
+    resetGame();
+    newGame = true;
 }
 
 function loser() {
-    for (var i = 0; i < words[game][0].length; i++) {
-        $('#block' + i).html("<img class='logo' src='images/logo.png' />");
-        $('#block' + i).css({"background": "radial-gradient(circle, lime, darkgreen)"});
-    }
-    gameOrder();
     $('#message').html("You Lose!");
     $('#round').html("Would You Like To Play Again?");
     $('#input').html("Enter Any Key To Guess");
+    roundComplete = [];
     for (var i = 0; i < words[game][0].length; i++) {
         roundComplete.push(0);   
     }
-    bank = 0;
-    pointsTotal = 0;
-    goToNextRound = 0;
-    wrongGuesses = 0;
-    roundComplete = [];
-    $('#bank').html('$' + bank);
-    $('#pointsTotal').html('$' + pointsTotal);
     $('.game').fadeOut();
     setTimeout(function() {
         game = 0;
         beginBoo = true;
-        $('#gameCounter').html('Game ' + (game + 1));
+        $('#gameCounter').html('<div>Game ' + (game + 1) + '</div><div>Wrong Guesses ' + wrongGuesses + '</div>');
         $('.modal').fadeIn();
     }, 1000);
+    newGame = true;
+}
+
+function resetGame() {
+    bank = 0;
+    points = 0;
+    pointsTotal = 0;
+    wrongGuesses = 0;
+    goToNextRound = 0;
+    newGame = false;
+    gameOrder();
+    $('#bank').html('$' + bank);
+    $('#pointsTotal').html('$' + pointsTotal);
+    for (var i = 0; i < 52; i++) {
+        $('#block' + i).html("<img class='logo' src='images/logo.png' />");
+        $('#block' + i).css({"background": "radial-gradient(circle, lime, darkgreen)"});
+    }
 }
 
 $('#begin').click(function() {
@@ -126,6 +130,9 @@ $('#begin').click(function() {
 });
 
 function begin() {
+    if (newGame) {
+        resetGame();
+    }
     beginBoo = false;
     $('.modal').fadeOut();
     $('#spin').html('SPIN');
