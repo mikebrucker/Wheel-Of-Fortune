@@ -65,7 +65,7 @@ function message() {
         beginBoo = true;
         $('.modal').fadeIn();
     }, 401);
-    $('#message').html("Are You Ready For Wheel Of JavaScript?");
+    $('#message').html("Wheel Of JavaScript");
     $('#round').html("Get Ready For Round " + (game + 1));
     $('#input').html("Enter Any Key To Guess");
     for (var i = 0; i < words[game][0].length; i++) {
@@ -85,8 +85,8 @@ function winner() {
         beginBoo = true;
         $('.modal').fadeIn();
     }, 401);
-    $('#message').html("You Win!!!");
-    $('#round').html("Would You Like To Play Again?");
+    $('#message').html("You Win Wheel of JavaScript!");
+    $('#round').html("You Won $" + bank + "!<div>Would You Like To Play Again?</div>");
     $('#input').html("Enter Any Key To Guess");
     for (var i = 0; i < words[game][0].length; i++) {
         roundComplete.push(0);
@@ -99,7 +99,7 @@ function loser() {
         $('#block' + i).css({"background": "radial-gradient(circle, lime, darkgreen)"});
     }
     gameOrder();
-    $('#message').html("You Lose!!!");
+    $('#message').html("You Lose!");
     $('#round').html("Would You Like To Play Again?");
     $('#input').html("Enter Any Key To Guess");
     for (var i = 0; i < words[game][0].length; i++) {
