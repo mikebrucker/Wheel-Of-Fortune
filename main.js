@@ -35,12 +35,10 @@ var spinBoo = false;
 var wrongGuess = false;
 var newGame = false;
 var tryToSolve = false;
-var solveGuess = '';
-var solvePuzzle = [];
 
 function solve() {
     if (tryToSolve) {
-        solveGuess = document.querySelector('input').value.toUpperCase().split('');
+        var solveGuess = document.querySelector('input').value.toUpperCase().split('');
         var x = solveGuess.length
         for (var i = 0; i < x; i++) {
             if (solveGuess[i] == ' ') {
@@ -49,25 +47,34 @@ function solve() {
             }
         }
         solveGuess = solveGuess.join('');
-        console.log(solveGuess);
-        solvePuzzle = gameWord;
-        var y = gameWord.length;
-        for (var i = 0; i < y; i++) {
+        var solvePuzzle = [];
+        for (var i = 0; i < gameWord.length; i++) {
+            solvePuzzle.push(gameWord[i]);
+        }
+        for (var i = 0; i < gameWord.length; i++) {
             if (solvePuzzle[i] == ' ') {
                 solvePuzzle.splice(i, 1);
                 i -= 1;
             }
         }
         solvePuzzle = solvePuzzle.join('');
-        console.log(solvePuzzle);
         if (solveGuess == solvePuzzle) {
-            winner();
-
+            for (var i = 0; i < gameWord.length; i++) {
+                if (gameWord[i] != ' ') {
+                    changeBoardBlock(gameWord, i);
+                }
+                roundComplete[i] = 1;
+            }
+            setTimeout(function() {
+                nextRound();
+                $('input').val('');
+            }, 1000);
         } else {
             loser();
         }
     }
 }
+
 
 $('.mainImage').mouseenter(function() {
     $('#solve').fadeIn();
@@ -297,11 +304,13 @@ function startgame(letter) {
 }
 
 function changeBoardBlock(funcGameWord, j) {
-    $('#block' + j).css({"background": "blue"});
-    setTimeout(function() {
-        $('#block' + j).html("<div class='align'>" + funcGameWord[j] + "</div>");
-        $('#block' + j).css({"background": 'radial-gradient(circle, white, whitesmoke, lightgray)'});
-    }, 1000);
+    if ($('#block' + j).html().length < 1) {
+        $('#block' + j).css({"background": "blue"});
+        setTimeout(function() {
+            $('#block' + j).html("<div class='align'>" + funcGameWord[j] + "</div>");
+            $('#block' + j).css({"background": 'radial-gradient(circle, white, whitesmoke, lightgray)'});
+        }, 1000);
+    }
 }
 
 function nextRound() {
