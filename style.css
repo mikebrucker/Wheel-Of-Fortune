@@ -57,7 +57,6 @@ body {
 .align {
     transform: scaleX(0.8);
     font-weight: bold;
-    margin: auto;
 }
 
 .block {
@@ -215,6 +214,5 @@ body {
 
 #gameCounter {
     font-size: 28px;
-    /* line-height: 28px; */
     padding: 5px 0;
 }
