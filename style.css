@@ -40,7 +40,7 @@ body {
     margin: auto;
 }
 
-.block, .corner, .row, #begin, #spin, #points, #pointsTotal {
+.block, .corner, .row, #begin, #spin, #points, #pointsTotal, #solvePuzzle {
     display: inline-block;
 }
 
@@ -148,7 +148,7 @@ body {
     background: radial-gradient(rgba(0, 0, 0, 0), forestgreen);
 }
 
-.modal, #begin, #spin, #points, #pointsTotal, #bank, #gameCounter {
+.modal, #begin, #spin, #points, #pointsTotal, #bank, #gameCounter, #solve, #solvePuzzle, input {
     border-radius: 8px;
 }
 
@@ -159,11 +159,11 @@ body {
     border-top: none;
 }
 
-#begin, #spin, #points, #bank {
+#begin, #spin, #points, #bank, #solve {
     color: forestgreen;
     background-color: rgb(255, 190, 55);
 }
-#begin, #spin, #points, #gameCounter {
+#begin, #spin, #points, #gameCounter, #solve {
     border: 16px solid rgb(255, 190, 55);
 }
 
@@ -185,7 +185,7 @@ body {
     margin: 0 auto 10px;
 }
 
-#points, #pointsTotal, #bank, #gameCounter {
+#points, #pointsTotal, #bank, #gameCounter, #solve {
     position: fixed;
     top: 0;
     z-index: 2;
@@ -197,7 +197,7 @@ body {
     margin-left: 10px;
 }
 
-#pointsTotal, #gameCounter {
+#pointsTotal, #gameCounter, input, #solvePuzzle {
     background-color: forestgreen;
     color: rgb(255, 190, 55);
 }
@@ -208,11 +208,44 @@ body {
     border: 16px solid forestgreen;
 }
 
-#bank, #gameCounter {
+
+#bank, #gameCounter, #solve {
     display: none;
 }
 
-#gameCounter {
+#gameCounter, #solve, input {
     font-size: 28px;
     padding: 5px 0;
+}
+
+#solve {
+    left: 50%;
+    transform: translateX(-50%);
+    width: 300px;
+    height: 114px;
+    border: 8px solid rgb(255, 190, 55);
+
+}
+
+input, #solvePuzzle {
+    width: 240px;
+    height: 40px;
+    border: 6px solid forestgreen;
+    font-weight: bold;
+}
+
+#solvePuzzle:active {
+    position: relative;
+    top: 2px;
+    left: 2px;
+}
+
+input {
+    outline: none;
+    margin-bottom: 6px;
+}
+
+input::placeholder {
+    color: rgb(255, 190, 55);
+    opacity: 0.7;
 }

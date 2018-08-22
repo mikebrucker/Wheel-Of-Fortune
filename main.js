@@ -34,6 +34,55 @@ var beginBoo = true;
 var spinBoo = false;
 var wrongGuess = false;
 var newGame = false;
+var tryToSolve = false;
+var solveGuess = '';
+var solvePuzzle = [];
+
+function solve() {
+    if (tryToSolve) {
+        solveGuess = document.querySelector('input').value.toUpperCase().split('');
+        var x = solveGuess.length
+        for (var i = 0; i < x; i++) {
+            if (solveGuess[i] == ' ') {
+                solveGuess.splice(i, 1);
+                i -= 1;
+            }
+        }
+        solveGuess = solveGuess.join('');
+        console.log(solveGuess);
+        solvePuzzle = gameWord;
+        var y = gameWord.length;
+        for (var i = 0; i < y; i++) {
+            if (solvePuzzle[i] == ' ') {
+                solvePuzzle.splice(i, 1);
+                i -= 1;
+            }
+        }
+        solvePuzzle = solvePuzzle.join('');
+        console.log(solvePuzzle);
+        if (solveGuess == solvePuzzle) {
+            winner();
+
+        } else {
+            loser();
+        }
+    }
+}
+
+$('.mainImage').mouseenter(function() {
+    $('#solve').fadeIn();
+    tryToSolve = true;
+})
+
+$('#solve').mouseleave(function() {
+    $('#solve').fadeOut();
+    tryToSolve = false;
+})
+
+$('#solvePuzzle').click(function() {
+    solve();
+    $('#spin').fadeOut();
+})
 
 function gameOrder() {
     var numberOfAnswers = words.length;
@@ -80,6 +129,8 @@ function winner() {
         beginBoo = true;
         $('.modal').fadeIn();
     }, 401);
+    $('.game').fadeOut();
+
     $('#message').html("You Win Wheel of JavaScript!");
     $('#round').html("You Won $" + bank + "!<div>Would You Like To Play Again?</div>");
     $('#input').html("Enter Any Key To Guess");
@@ -118,6 +169,7 @@ function resetGame() {
     newGame = false;
     gameOrder();
     $('#bank').html('$' + bank);
+    $('#points').html('$' + points);
     $('#pointsTotal').html('$' + pointsTotal);
     for (var i = 0; i < 52; i++) {
         $('#block' + i).html("<img class='logo' src='images/logo.png' />");
@@ -183,19 +235,21 @@ function spin() {
 }
 
 document.addEventListener('keypress', function (event) {
-    if (!guess) {
-        letter = event.key.toUpperCase();
-        if ((letter === 'B') && (beginBoo === true)) {
-            begin();
+    if (!tryToSolve){
+        if (!guess) {
+            letter = event.key.toUpperCase();
+            if ((letter === 'B') && (beginBoo === true)) {
+                begin();
+            }
+            if ((letter === 'S') && (spinBoo === true)) {
+                spin();
+            }
         }
-        if ((letter === 'S') && (spinBoo === true)) {
-            spin();
+        if (guess) {
+            letter = event.key.toUpperCase();
+            document.getElementById('input').innerText = letter;
+            startgame(letter);
         }
-    }
-    if (guess) {
-        letter = event.key.toUpperCase();
-        document.getElementById('input').innerText = letter;
-        startgame(letter);
     }
 });
 
