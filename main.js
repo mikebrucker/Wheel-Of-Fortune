@@ -70,7 +70,10 @@ function solve() {
                 $('input').val('');
             }, 1000);
         } else {
-            loser();
+            setTimeout(function() {
+                loser();
+                $('input').val('');
+            }, 1000);
         }
     }
 }
