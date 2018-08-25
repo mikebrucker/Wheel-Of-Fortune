@@ -9,13 +9,21 @@ var words = [['  HYPERTEXT     MARKUP       LANGUAGE', 'Code'],
              ['             KANSAS CITY  STYLE BARBECUE', 'Food and Drink'],
              ['              GUTE NACHT', 'Non-English Phrase'],
              [' THAT RUG     REALLY TIED   THE ROOM      TOGETHER', 'Movie Quote'],
+             ['               SUPER         TROOPERS', 'Movie'],
+             [' STAR TREK    THE WRATH     OF KHAN', 'Movie'],
+             ['               RICK AND       MORTY', 'Television'],
+             ['               GAME OF       THRONES', 'Television'],
+             ['               JERRY         SEINFELD', 'Television'],
              ['   I COME        FROM         A LAND     DOWN UNDER', 'Music'],
              ['  BETWEEN     THE BURIED     AND ME', 'Music'],
              ['  SUMMER       SLAUGHTER     FESTIVAL', 'Music'],
+             ['  WHO LET    THE DOGS OUT  BY BAHA MEN', 'Music'],
              ['              INNSBRUCK      AUSTRIA', 'Geography'],
              ['             PHILADELPHIA  PENNSYLVANIA', 'Geography'],
+             ['                KILAUEA   VOLCANO HAWAII', 'Geography'],
              [' SUPER BOWL  LII CHAMPIONS PHILADELPHIA  EAGLES', 'Sports'],
-             [' WASHINGTON   CAPITAL       ALEXANDER    OVECHKIN', 'Sports']
+             [' WASHINGTON   CAPITAL       ALEXANDER    OVECHKIN', 'Sports'],
+             ['              BUTTERFLY     SWIMMING', 'Sports']
             ];
 //             _1234567890_/+1234567890+\/+1234567890+\_1234567890_
 var letter;
@@ -35,6 +43,44 @@ var spinBoo = false;
 var wrongGuess = false;
 var newGame = false;
 var tryToSolve = false;
+
+$('.modal').hide();
+$('.game').hide();
+$('#spin').hide();
+$('.block').html("<img class='logo' src='images/logo.png' />");
+
+function gameOrder() {
+    var numberOfAnswers = words.length;
+    var uniqueGameOrder = [];
+    for (var i = 0; i < numberOfAnswers; i++) {
+        var x = Math.floor(Math.random() * words.length);
+        uniqueGameOrder.push(words[x]);
+        words.splice(x, 1);
+    }
+    words = uniqueGameOrder;
+}
+
+gameOrder();
+
+function logAnswers() {
+    var puzzleLog = [];
+    for (var i = 0; i < words.length; i++) {
+        puzzleLog.push(words[i][0].split(' '));
+        for (var j = 0; j < puzzleLog[i].length; j++){
+            if (1 > puzzleLog[i][j]) {
+                puzzleLog[i].splice(j, 1);
+                j--;
+            }
+        }
+            // console.log(puzzleLog[i])
+       
+        
+        puzzleLog[i] = puzzleLog[i].join(' ');
+        console.log('Puzzle ' + (i + 1) + ': ' + puzzleLog[i]);
+    }
+}
+
+logAnswers();
 
 function solve() {
     if (tryToSolve) {
@@ -78,6 +124,13 @@ function solve() {
     }
 }
 
+$('#begin').click(function() {
+    begin();
+});
+
+$('#spin').click(function() {
+    spin();
+})
 
 $('.mainImage').mouseenter(function() {
     $('#solve').fadeIn();
@@ -94,25 +147,21 @@ $('#solvePuzzle').click(function() {
     $('#spin').fadeOut();
 })
 
-function gameOrder() {
-    var numberOfAnswers = words.length;
-    var array = words;
-    var uniqueGameOrder = [];
-    for (var i = 0; i < numberOfAnswers; i++) {
-        var x = Math.floor(Math.random() * array.length);
-        uniqueGameOrder.push(array[x]);
-        console.log('Puzzle ' + (i + 1) + ': ' + array[x][0].trim())
-        array.splice(x, 1);
-    }
-    words = uniqueGameOrder;
-}
+$('#pointsTotal').mouseenter(function() {
+    $('#bank').fadeIn();
+})
 
-gameOrder();
+$('#bank').mouseleave(function() {
+    $('#bank').fadeOut();
+})
 
-$('.modal').hide();
-$('.game').hide();
-$('#spin').hide();
-$('.block').html("<img class='logo' src='images/logo.png' />");
+$('#points').mouseenter(function() {
+    $('#gameCounter').fadeIn();
+})
+
+$('#gameCounter').mouseleave(function() {
+    $('#gameCounter').fadeOut();
+})
 
 setTimeout(function() {
     message();
@@ -187,10 +236,6 @@ function resetGame() {
     }
 }
 
-$('#begin').click(function() {
-    begin();
-});
-
 function begin() {
     if (newGame) {
         resetGame();
@@ -216,10 +261,6 @@ function begin() {
         }
     }
 }
-
-$('#spin').click(function() {
-    spin();
-})
 
 function spin() {
     spinBoo = false;
@@ -338,22 +379,6 @@ function nextRound() {
         }
     }, 2000);
 }
-
-$('#pointsTotal').mouseenter(function() {
-    $('#bank').fadeIn();
-})
-
-$('#bank').mouseleave(function() {
-    $('#bank').fadeOut();
-})
-
-$('#points').mouseenter(function() {
-    $('#gameCounter').fadeIn();
-})
-
-$('#gameCounter').mouseleave(function() {
-    $('#gameCounter').fadeOut();
-})
 
 function heightContainer() {
     browserHeight = parseInt(window.innerHeight);
