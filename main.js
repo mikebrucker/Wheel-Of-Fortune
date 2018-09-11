@@ -398,9 +398,9 @@ $(window).resize(function() {
 
 heightContainer();
 
-// setInterval(function(){
-//     var date = new Date();
-//     var sec = date.getSeconds();
-//     var mil = date.getMilliseconds();
-//     $('.container').css({"background": "linear-gradient(to bottom, rgba(0, 0, 0, 0) 33%, hsl(" + ((sec + (0.001 * mil)) * 6) + ", 100%, 50%)"});
-// }, 100);
+setInterval(function(){
+    var date = new Date();
+    var sec = date.getSeconds();
+    var mil = date.getMilliseconds();
+    $('.container').css({"background": "linear-gradient(to bottom, rgba(0, 0, 0, 0) 33%, hsl(" + ((sec + (0.001 * mil)) * 6) + ", 100%, 50%)"});
+}, 250);
