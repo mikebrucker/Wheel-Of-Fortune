@@ -6,23 +6,33 @@ html {
     background-color: black;
 }
 
+body, #description, .input {
+    margin: 0 auto;
+}
+
 body {
     background: url(images/pool.jpg) no-repeat fixed top;
     background-size: 100%;
     width: 100%;
-    margin: 0 auto;
-    font-size: 66px;
     text-align: center;
     font-family: Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    font-size: 0;
+}
+.display {
+    font-size: 66px;
 }
 
 #round {
     font-size: 52px;
 }
 
-
 .info {
     font-size: 32px;
+}
+
+.row {
+    background-color: darkgreen;
+    font-size: 80px;
 }
 
 .container {
@@ -44,81 +54,85 @@ body {
     display: inline-block;
 }
 
-.block, .corner, #begin:active, #spin:active {
+.block, .corner, #begin:active, #spin:active, #solvePuzzle:active {
     position: relative;
-}
-
-.corner {
-    margin: 0;
-    width: 89px;
-    height: 110px;
 }
 
 .align {
     transform: scaleX(0.8);
+}
+
+.align, input, #solvePuzzle, .input, .modal, #description {
     font-weight: bold;
 }
 
+.row, .corner {
+    margin: 0;
+}
+
+.corner {
+    width: 94px;
+    height: 114px;
+    line-height: 0;
+}
+
 .block {
-    width: 75px;
-    height: 96px;
+    width: 80px;
+    height: 100px;
     margin: 0 2px;
-    line-height: 88px;
+    line-height: 90px;
     border: 5px outset rgb(24, 24, 24);
     background: radial-gradient(circle, lime, darkgreen);
 }
 
-.block, .align, .corner {
+.block, .align {
     vertical-align: middle;
 }
 
-#blockTopLeft, #blockTopRight {
-    border-bottom: 10px solid cyan;
+#row1, #row2, #blockTopLeft, #blockTopRight {
     vertical-align: bottom;
 }
-#blockBottomRight, #blockBottomLeft {
-    border-top: 10px solid cyan;
+
+#row3, #row4, #blockBottomRight, #blockBottomLeft {
     vertical-align: top;
-    
 }
-#blockTopRight, #blockBottomRight {
+
+#blockTopLeft, #blockTopRight, #row4 {
+    border-bottom: 10px solid cyan;
+}
+
+#blockBottomRight, #blockBottomLeft, #row1 {
+    border-top: 10px solid cyan;
+}
+
+#blockTopRight, #blockBottomRight, #row2, #row3 {
     border-left: 10px solid cyan;
 }
-#blockBottomLeft, #blockTopLeft {
+
+#blockBottomLeft, #blockTopLeft, #row2, #row3 {
     border-right: 10px solid cyan;
 }
 
-.row {
-    background-color: darkgreen;
-    font-size: 80px;
-}
-#row1 {
-    border-top: 10px solid cyan;
-}
 #row2 {
-    border-left: 10px solid cyan;
-    border-right: 10px solid cyan;
     padding-bottom: 2px;
 }
+
 #row3 {
-    border-left: 10px solid cyan;
-    border-right: 10px solid cyan;
     padding-top: 2px;
 }
-#row4 {
-    border-bottom: 10px solid cyan;
-}
+
 #row1, #row2 {
     padding-top: 4px;
-    vertical-align: text-bottom;
 }
+
 #row3, #row4 {
     padding-bottom: 4px;
-    vertical-align: top;
 }
+
 #block0, #block12, #block26, #block40 {
     margin-left: 4px;
 }
+
 #block11, #block25, #block39, #block51 {
     margin-right: 4px;
 }
@@ -140,11 +154,13 @@ body {
     border: 10px solid cyan;
 }
 
-.input, .modal, #description {
-    max-width: 972px;
+.input, .modal, #description, #pointsTotal, #gameCounter, input, #solvePuzzle, input::placeholder {
     color: rgb(255, 190, 55);
+}
+
+.input, .modal, #description {
+    max-width: 680px;
     text-shadow: -10px 10px 20px black;
-    font-weight: 900;
     background: radial-gradient(rgba(0, 0, 0, 0), forestgreen);
 }
 
@@ -153,9 +169,11 @@ body {
 }
 
 #description, .input {
-    margin: 0 auto;
     padding: 10px 0;
     font-size: 56px;
+}
+
+.input {
     border-top: none;
 }
 
@@ -168,8 +186,11 @@ body {
 }
 
 #begin, #spin, #points, #pointsTotal, #bank, #gameCounter {
-    margin: 10px auto 0;
     text-shadow: none;
+}
+
+#description, #begin, #spin, #points, #pointsTotal, #bank, #gameCounter {
+    margin: 10px auto 0;
 }
 
 #begin:active, #spin:active {
@@ -199,7 +220,6 @@ body {
 
 #pointsTotal, #gameCounter, input, #solvePuzzle {
     background-color: forestgreen;
-    color: rgb(255, 190, 55);
 }
 
 #pointsTotal, #bank {
@@ -207,7 +227,6 @@ body {
     margin-right: 10px;
     border: 16px solid forestgreen;
 }
-
 
 #bank, #gameCounter, #solve {
     display: none;
@@ -224,18 +243,15 @@ body {
     width: 300px;
     height: 114px;
     border: 8px solid rgb(255, 190, 55);
-
 }
 
 input, #solvePuzzle {
     width: 240px;
     height: 40px;
     border: 6px solid forestgreen;
-    font-weight: bold;
 }
 
 #solvePuzzle:active {
-    position: relative;
     top: 2px;
     left: 2px;
 }
@@ -246,6 +262,271 @@ input {
 }
 
 input::placeholder {
-    color: rgb(255, 190, 55);
     opacity: 0.7;
+}
+
+@media all and (max-width: 1214px) and (min-width: 1101px) {
+    .block {
+        width: 70px;
+        height: 87px;
+        line-height: 77px;
+    }
+
+    .corner {
+        width: 84px;
+        height: 101px;
+    }
+
+    .row {
+        font-size: 68px;
+    }
+}
+
+@media all and (max-width: 1100px) and (min-width: 1001px) {
+    .block {
+        width: 64px;
+        height: 80px;
+        line-height: 70px;
+    }
+    
+    .corner {
+        width: 78px;
+        height: 94px;
+    }
+    
+    .row {
+        font-size: 62px;
+    }
+}
+
+@media all and (max-width: 1000px) and (min-width: 901px) {
+    .block {
+        width: 57px;
+        height: 72px;
+        line-height: 62px;
+    }
+    
+    .corner {
+        width: 71px;
+        height: 86px;
+    }
+    
+    .row {
+        font-size: 55px;
+    }
+}
+
+@media all and (max-width: 900px) and (min-width: 801px) {
+    .block {
+        width: 50px;
+        height: 63px;
+        line-height: 53px;
+    }
+    
+    .corner {
+        width: 64px;
+        height: 77px;
+    }
+    
+    .row {
+        font-size: 47px;
+    }
+}
+
+@media all and (max-width: 800px) and (min-width: 701px) {
+    .block {
+        width: 43px;
+        height: 54px;
+        line-height: 48px;
+    }
+    
+    .corner {
+        width: 51px;
+        height: 62px;
+    }
+    
+    .row {
+        font-size: 42px;
+    }
+}
+
+@media all and (max-width: 700px) and (min-width: 641px) {
+    .block {
+        width: 39px;
+        height: 49px;
+        line-height: 43px;
+    }
+    
+    .corner {
+        width: 47px;
+        height: 57px;
+    }
+    
+    .row {
+        font-size: 38px;
+    }
+}
+
+@media all and (max-width: 640px) and (min-width: 581px) {
+    .block {
+        width: 36px;
+        height: 45px;
+        line-height: 39px;
+    }
+    
+    .corner {
+        width: 44px;
+        height: 52px;
+    }
+    
+    .row {
+        font-size: 34px;
+    }
+}
+
+@media all and (max-width: 580px) and (min-width: 521px) {
+    .block {
+        width: 32px;
+        height: 40px;
+        line-height: 34px;
+    }
+    
+    .corner {
+        width: 40px;
+        height: 48px;
+    }
+    
+    .row {
+        font-size: 30px;
+    }
+}
+
+@media all and (max-width: 520px) and (min-width: 481px) {
+    .block {
+        width: 30px;
+        height: 38px;
+        line-height: 32px;
+    }
+    
+    .corner {
+        width: 38px;
+        height: 46px;
+    }
+    
+    .row {
+        font-size: 28px;
+    }
+}
+
+@media all and (max-width: 480px) and (min-width: 441px) {
+    .block {
+        width: 27px;
+        height: 34px;
+        line-height: 28px;
+    }
+    
+    .corner {
+        width: 35px;
+        height: 42px;
+    }
+    
+    .row {
+        font-size: 25px;
+    }
+}
+
+@media all and (max-width: 440px) and (min-width: 401px) {
+    .block {
+        width: 24px;
+        height: 30px;
+        line-height: 24px;
+    }
+    
+    .corner {
+        width: 32px;
+        height: 38px;
+    }
+    
+    .row {
+        font-size: 21px;
+    }
+}
+
+@media all and (max-width: 400px) and (min-width: 360px) {
+    .block {
+        width: 21px;
+        height: 27px;
+        line-height: 21px;
+    }
+    
+    .corner {
+        width: 29px;
+        height: 35px;
+    }
+    
+    .row {
+        font-size: 19px;
+    }
+}
+
+@media all and (max-width: 359px) {
+    .block {
+        width: 19px;
+        height: 24px;
+        line-height: 18px;
+    }
+    
+    .corner {
+        width: 27px;
+        height: 32px;
+    }
+    
+    .row {
+        font-size: 16px;
+    }
+}
+
+@media all and (max-width: 800px) {
+    .block {
+        margin: 0 1px;
+        border: 3px outset rgb(24, 24, 24);
+    }
+    #blockTopLeft, #blockTopRight, #row4 {
+        border-bottom: 6px solid cyan;
+    }
+    
+    #blockBottomRight, #blockBottomLeft, #row1 {
+        border-top: 6px solid cyan;
+    }
+    
+    #blockTopRight, #blockBottomRight, #row2, #row3 {
+        border-left: 6px solid cyan;
+    }
+    
+    #blockBottomLeft, #blockTopLeft, #row2, #row3 {
+        border-right: 6px solid cyan;
+    }
+
+    #row2 {
+        padding-bottom: 1px;
+    }
+    
+    #row3 {
+        padding-top: 1px;
+    }
+    
+    #row1, #row2 {
+        padding-top: 2px;
+    }
+    
+    #row3, #row4 {
+        padding-bottom: 2px;
+    }
+    #block0, #block12, #block26, #block40 {
+        margin-left: 2px;
+    }
+    
+    #block11, #block25, #block39, #block51 {
+        margin-right: 2px;
+    }
 }

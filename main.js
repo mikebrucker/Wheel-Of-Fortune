@@ -36,10 +36,10 @@ var bank = 0;
 var wrongGuesses = 0;
 var roundComplete = [];
 var gameWord = [];
-var possiblePoints = [100, 100, 100, 100, 100, 200, 200, 200, 200, 200, 300, 300, 300, 300, 300, 400, 400, 400, 400, 500, 500, 500, 500, 600, 600, 600, 600, 700, 700, 700, 800, 800, 800, 900, 900, 1000, 1000, 1500, 2000, 'BANKRUPT'];
+var possiblePoints = ['BANKRUPT', 'BANKRUPT', 300, 350, 400, 450, 500, 500, 550, 600, 600, 650, 700, 700, 750, 800, 800, 850, 900, 900, 1000, 1500, 2000, 'BANKRUPT', 'BANKRUPT', 300, 350, 400, 450, 500, 500, 550, 600, 600, 650, 700, 700, 750, 800, 800, 850, 900, 1000, 1500, 2000, 2500, 'BANKRUPT', 'BANKRUPT', 300, 350, 400, 450, 500, 500, 550, 600, 600, 650, 700, 700, 750, 800, 800, 850, 900, 1000, 2000, 2500, 3500, 'BANKRUPT', 'BANKRUPT', 1000000];
 var guess = false;
-var beginBoo = true;
-var spinBoo = false;
+var beginBoolean = true;
+var spinBoolean = false;
 var wrongGuess = false;
 var newGame = false;
 var tryToSolve = false;
@@ -72,9 +72,6 @@ function logAnswers() {
                 j--;
             }
         }
-            // console.log(puzzleLog[i])
-       
-        
         puzzleLog[i] = puzzleLog[i].join(' ');
         console.log('Puzzle ' + (i + 1) + ': ' + puzzleLog[i]);
     }
@@ -168,10 +165,10 @@ setTimeout(function() {
 }, 401);
 
 function message() {
-    spinBoo = false;
+    spinBoolean = false;
     wrongGuesses = 0;
     setTimeout(function() {
-        beginBoo = true;
+        beginBoolean = true;
         $('.modal').fadeIn();
     }, 401);
     $('#message').html("Wheel Of JavaScript");
@@ -185,7 +182,7 @@ function message() {
 function winner() {
     setTimeout(function() {
         game = 0;
-        beginBoo = true;
+        beginBoolean = true;
         $('.modal').fadeIn();
     }, 401);
     $('.game').fadeOut();
@@ -212,7 +209,7 @@ function loser() {
     $('.game').fadeOut();
     setTimeout(function() {
         game = 0;
-        beginBoo = true;
+        beginBoolean = true;
         $('#gameCounter').html('<div>Game ' + (game + 1) + '</div><div>Wrong Guesses ' + wrongGuesses + '</div>');
         $('.modal').fadeIn();
     }, 1000);
@@ -240,14 +237,14 @@ function begin() {
     if (newGame) {
         resetGame();
     }
-    beginBoo = false;
+    beginBoolean = false;
     $('.modal').fadeOut();
     $('#spin').html('SPIN');
     setTimeout(function() {
         $('#input').hide();
         $('.game').fadeIn();
         $('#spin').fadeIn();
-        spinBoo = true;
+        spinBoolean = true;
     }, 500);
     gameWord = words[game][0].split('');
     $('#description').html(words[game][1])
@@ -263,12 +260,12 @@ function begin() {
 }
 
 function spin() {
-    spinBoo = false;
+    spinBoolean = false;
     $('#input').html('Enter Any Key To Guess');
     if (!guess) {
         points = possiblePoints[Math.floor(Math.random()*possiblePoints.length)];
         if (points === 'BANKRUPT') {
-            spinBoo = true;
+            spinBoolean = true;
             pointsTotal = 0;
             $('#pointsTotal').html('$0')
             $('#points').html('Bankrupt');
@@ -289,10 +286,10 @@ document.addEventListener('keypress', function (event) {
     if (!tryToSolve){
         if (!guess) {
             letter = event.key.toUpperCase();
-            if ((letter === 'B') && (beginBoo === true)) {
+            if ((letter === 'B') && (beginBoolean === true)) {
                 begin();
             }
-            if ((letter === 'S') && (spinBoo === true)) {
+            if ((letter === 'S') && (spinBoolean === true)) {
                 spin();
             }
         }
@@ -334,7 +331,7 @@ function startgame(letter) {
             $('#input').fadeOut();
             setTimeout(function() {
                 setTimeout(function() {
-                    spinBoo = true;
+                    spinBoolean = true;
                 }, 400);
                 $('#spin').fadeIn();
             }, 400);
@@ -352,7 +349,10 @@ function changeBoardBlock(funcGameWord, j) {
         $('#block' + j).css({"background": "blue"});
         setTimeout(function() {
             $('#block' + j).html("<div class='align'>" + funcGameWord[j] + "</div>");
-            $('#block' + j).css({"background": 'radial-gradient(circle, white, whitesmoke, lightgray)'});
+            $('#block' + j).css({"background": "radial-gradient(circle, white, whitesmoke, lightgray)"});
+            if (funcGameWord[j] == 'W') {
+                $('#block' + j + ' .align').css({"transform": "scaleX(0.8) translateX(-4%)"})
+            }
         }, 1000);
     }
 }
@@ -367,6 +367,7 @@ function nextRound() {
         for (var i = 0; i < words[game][0].length; i++) {
             $('#block' + i).html("<img class='logo' src='images/logo.png' />");
             $('#block' + i).css({"background": "radial-gradient(circle, lime, darkgreen)"});
+            $('#block' + i + ' .align').removeAttr("transform")
         }
         goToNextRound = 0;
         roundComplete = [];
@@ -397,9 +398,9 @@ $(window).resize(function() {
 
 heightContainer();
 
-setInterval(function(){
-    var date = new Date();
-    var sec = date.getSeconds();
-    var mil = date.getMilliseconds();
-    $('.container').css({"background": "linear-gradient(to bottom, rgba(0, 0, 0, 0) 33%, hsl(" + ((sec + (0.001 * mil)) * 6) + ", 100%, 50%)"});
-}, 100);
+// setInterval(function(){
+//     var date = new Date();
+//     var sec = date.getSeconds();
+//     var mil = date.getMilliseconds();
+//     $('.container').css({"background": "linear-gradient(to bottom, rgba(0, 0, 0, 0) 33%, hsl(" + ((sec + (0.001 * mil)) * 6) + ", 100%, 50%)"});
+// }, 100);
