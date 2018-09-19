@@ -14,18 +14,22 @@
 
 <body>
 <div class="container">
+    <nav>
+        <div class="topleft">
+            <div class="display" id="points">$0</div>
+            <div class="display" id="gameCounter"><div>Game 1</div><div>Wrong Guesses 0</div></div>
+        </div>
+        
+        <div class="topcenter" id="solve">
+            <input id="solveInput" type="text" class="display" placeholder="Solve The Puzzle">
+            <div class="display"><div id="solvePuzzle">SOLVE</div></div>
+        </div>
 
-    <div class="display" id="points">$0</div>
-    <div class="display" id="pointsTotal">$0</div>
-    <div class="display" id="bank">$0</div>
-    <div class="display" id="gameCounter"><div>Game 1</div><div>Wrong Guesses 0</div></div>
-
-    <img class="mainImage" src="images/biglogo.png" />
-
-    <div class="display" id="solve">
-        <input type="text" placeholder="Solve The Puzzle">
-        <div id="solvePuzzle">SOLVE</div>
-    </div>
+        <div class="topright">
+            <div class="display" id="pointsTotal">$0</div>
+            <div class="display" id="bank">$0</div>
+        </div>
+    </nav>
 
     <div class="modal">
         <div id="message"></div>
@@ -35,7 +39,7 @@
         <div class="info">Hot Keys: S for Spin // B for Begin</div>
         <div class="info">Mouse Over: Top Left for Game // Top Right for Bank</div>
         <div class="info">Center Logo to Solve</div>
-        <div class="display" id="begin">BEGIN</div>
+        <div class="button" id="begin">BEGIN</div>
     </div>
     
     <div class="game">
@@ -43,11 +47,14 @@
         <div class="row" id="row2"><div class="block" id="block12"></div><div class="block" id="block13"></div><div class="block" id="block14"></div><div class="block" id="block15"></div><div class="block" id="block16"></div><div class="block" id="block17"></div><div class="block" id="block18"></div><div class="block" id="block19"></div><div class="block" id="block20"></div><div class="block" id="block21"></div><div class="block" id="block22"></div><div class="block" id="block23"></div><div class="block" id="block24"></div><div class="block" id="block25"></div></div><div class="newLine"></div>
         <div class="row" id="row3"><div class="block" id="block26"></div><div class="block" id="block27"></div><div class="block" id="block28"></div><div class="block" id="block29"></div><div class="block" id="block30"></div><div class="block" id="block31"></div><div class="block" id="block32"></div><div class="block" id="block33"></div><div class="block" id="block34"></div><div class="block" id="block35"></div><div class="block" id="block36"></div><div class="block" id="block37"></div><div class="block" id="block38"></div><div class="block" id="block39"></div></div><div class="newLine"></div>
         <div class="corner" id="blockBottomLeft"></div><div class="row" id="row4"><div class="block" id="block40"></div><div class="block" id="block41"></div><div class="block" id="block42"></div><div class="block" id="block43"></div><div class="block" id="block44"></div><div class="block" id="block45"></div><div class="block" id="block46"></div><div class="block" id="block47"></div><div class="block" id="block48"></div><div class="block" id="block49"></div><div class="block" id="block50"></div><div class="block" id="block51"></div></div><div class="corner" id="blockBottomRight"></div><div class="newLine"></div>
-        <div id="description"></div>
-        <div id="input" class="input">Enter Any Key To Guess</div>
+        <div class="gameInfo">
+            <div id="description"></div>
+            <input id="input" class="input" value="Guess Letter" />
+        </div>
     </div>
+    
 
-    <div class="display" id="spin">SPIN</div>
+    <div class="button" id="spin">SPIN</div>
 
 </div>
 

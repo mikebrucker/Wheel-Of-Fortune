@@ -41,26 +41,13 @@ var guess = false;
 var beginBoolean = true;
 var spinBoolean = false;
 var wrongGuess = false;
-var newGame = false;
+var cantSolve = true;
 var tryToSolve = false;
 
 $('.modal').hide();
 $('.game').hide();
 $('#spin').hide();
 $('.block').html("<img class='logo' src='images/logo.png' />");
-
-function gameOrder() {
-    var numberOfAnswers = words.length;
-    var uniqueGameOrder = [];
-    for (var i = 0; i < numberOfAnswers; i++) {
-        var x = Math.floor(Math.random() * words.length);
-        uniqueGameOrder.push(words[x]);
-        words.splice(x, 1);
-    }
-    words = uniqueGameOrder;
-}
-
-gameOrder();
 
 function logAnswers() {
     var puzzleLog = [];
@@ -77,11 +64,24 @@ function logAnswers() {
     }
 }
 
-logAnswers();
+function gameOrder() {
+    var numberOfAnswers = words.length;
+    var uniqueGameOrder = [];
+    for (var i = 0; i < numberOfAnswers; i++) {
+        var x = Math.floor(Math.random() * words.length);
+        uniqueGameOrder.push(words[x]);
+        words.splice(x, 1);
+    }
+    words = uniqueGameOrder;
+    logAnswers();
+}
 
-function solve() {
+gameOrder();
+
+function solve(guess) {
     if (tryToSolve) {
-        var solveGuess = document.querySelector('input').value.toUpperCase().split('');
+        console.log(guess);
+        var solveGuess = guess
         var x = solveGuess.length
         for (var i = 0; i < x; i++) {
             if (solveGuess[i] == ' ') {
@@ -127,38 +127,24 @@ $('#begin').click(function() {
 
 $('#spin').click(function() {
     spin();
-})
+});
 
-$('.mainImage').mouseenter(function() {
-    $('#solve').fadeIn();
+$('#solve').mouseenter(function() {
     tryToSolve = true;
-})
+});
 
 $('#solve').mouseleave(function() {
-    $('#solve').fadeOut();
     tryToSolve = false;
-})
+});
 
 $('#solvePuzzle').click(function() {
-    solve();
-    $('#spin').fadeOut();
-})
+    if (!cantSolve) {
+        solve($('#solveInput').val().toUpperCase().split(''));
+        $('#spin').fadeOut();
+    }
+});
 
-$('#pointsTotal').mouseenter(function() {
-    $('#bank').fadeIn();
-})
-
-$('#bank').mouseleave(function() {
-    $('#bank').fadeOut();
-})
-
-$('#points').mouseenter(function() {
-    $('#gameCounter').fadeIn();
-})
-
-$('#gameCounter').mouseleave(function() {
-    $('#gameCounter').fadeOut();
-})
+$()
 
 setTimeout(function() {
     message();
@@ -173,10 +159,11 @@ function message() {
     }, 401);
     $('#message').html("Wheel Of JavaScript");
     $('#round').html("Get Ready For Round " + (game + 1));
-    $('#input').html("Enter Any Key To Guess");
+    $('#input').val("Enter Any Key To Guess");
     for (var i = 0; i < words[game][0].length; i++) {
         roundComplete.push(0);
     }
+    cantSolve = true;
 }
 
 function winner() {
@@ -189,19 +176,18 @@ function winner() {
 
     $('#message').html("You Win Wheel of JavaScript!");
     $('#round').html("You Won $" + bank + "!<div>Would You Like To Play Again?</div>");
-    $('#input').html("Enter Any Key To Guess");
+    $('#input').val("Enter Any Key To Guess");
     $('#gameCounter').html('<div>Game ' + game + '</div><div>Wrong Guesses ' + wrongGuesses + '</div>');
     for (var i = 0; i < words[game][0].length; i++) {
         roundComplete.push(0);
     }
     resetGame();
-    newGame = true;
 }
 
 function loser() {
     $('#message').html("You Lose!");
     $('#round').html("Would You Like To Play Again?");
-    $('#input').html("Enter Any Key To Guess");
+    $('#input').val("Enter Any Key To Guess");
     roundComplete = [];
     for (var i = 0; i < words[game][0].length; i++) {
         roundComplete.push(0);   
@@ -213,7 +199,7 @@ function loser() {
         $('#gameCounter').html('<div>Game ' + (game + 1) + '</div><div>Wrong Guesses ' + wrongGuesses + '</div>');
         $('.modal').fadeIn();
     }, 1000);
-    newGame = true;
+    resetGame();
 }
 
 function resetGame() {
@@ -222,7 +208,12 @@ function resetGame() {
     pointsTotal = 0;
     wrongGuesses = 0;
     goToNextRound = 0;
-    newGame = false;
+    guess = false;
+    beginBoolean = true;
+    spinBoolean = false;
+    wrongGuess = false;
+    cantSolve = true;
+    tryToSolve = false;
     gameOrder();
     $('#bank').html('$' + bank);
     $('#points').html('$' + points);
@@ -234,12 +225,9 @@ function resetGame() {
 }
 
 function begin() {
-    if (newGame) {
-        resetGame();
-    }
     beginBoolean = false;
+    cantSolve = false;
     $('.modal').fadeOut();
-    $('#spin').html('SPIN');
     setTimeout(function() {
         $('#input').hide();
         $('.game').fadeIn();
@@ -261,7 +249,7 @@ function begin() {
 
 function spin() {
     spinBoolean = false;
-    $('#input').html('Enter Any Key To Guess');
+    $('#input').val('Enter Any Key To Guess');
     if (!guess) {
         points = possiblePoints[Math.floor(Math.random()*possiblePoints.length)];
         if (points === 'BANKRUPT') {
@@ -294,8 +282,11 @@ document.addEventListener('keypress', function (event) {
             }
         }
         if (guess) {
+            $('#input').val('');
             letter = event.key.toUpperCase();
-            document.getElementById('input').innerText = letter;
+            setTimeout(function() {
+                $('#input').val(letter);
+            }, 25);
             startgame(letter);
         }
     }
@@ -334,6 +325,7 @@ function startgame(letter) {
                     spinBoolean = true;
                 }, 400);
                 $('#spin').fadeIn();
+                $('#input').val("Enter Any Key To Guess");
             }, 400);
         }, 400);
     }
@@ -387,8 +379,8 @@ function heightContainer() {
         document.querySelector('body').style.minHeight = ('768px');
         document.querySelector('.container').style.minHeight = ('768px');
     } else {
-        document.querySelector('body').style.height = (browserHeight + 'px');
-        document.querySelector('.container').style.height = (browserHeight + 'px');
+        document.querySelector('body').style.height = (browserHeight * 1.25 + 'px');
+        document.querySelector('.container').style.height = (browserHeight * 1.25 + 'px');
     }
 }
 
@@ -398,9 +390,9 @@ $(window).resize(function() {
 
 heightContainer();
 
-setInterval(function(){
-    var date = new Date();
-    var sec = date.getSeconds();
-    var mil = date.getMilliseconds();
-    $('.container').css({"background": "linear-gradient(to bottom, rgba(0, 0, 0, 0) 33%, hsl(" + ((sec + (0.001 * mil)) * 6) + ", 100%, 50%)"});
-}, 250);
+// setInterval(function(){
+//     var date = new Date();
+//     var sec = date.getSeconds();
+//     var mil = date.getMilliseconds();
+//     $('.container').css({"background": "linear-gradient(to bottom, rgba(0, 0, 0, 0) 33%, hsl(" + ((sec + (0.001 * mil)) * 6) + ", 100%, 50%)"});
+// }, 250);

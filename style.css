@@ -6,7 +6,7 @@ html {
     background-color: black;
 }
 
-body, #description, .input {
+body, #description, .gameInfo {
     margin: 0 auto;
 }
 
@@ -14,15 +14,19 @@ body {
     background: url(images/pool.jpg) no-repeat fixed top;
     background-size: 100%;
     width: 100%;
-    text-align: center;
     font-family: Haettenschweiler, 'Arial Narrow Bold', sans-serif;
     font-size: 0;
 }
-.display {
+
+body, input  {
+    text-align: center;
+}
+
+.button {
     font-size: 66px;
 }
 
-#round {
+.display, #round, #message {
     font-size: 52px;
 }
 
@@ -36,7 +40,7 @@ body {
 }
 
 .container {
-    background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 33%, hsl(180, 100%, 50%));
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0), hsl(180, 100%, 50%));
 }
 
 .logo {
@@ -50,7 +54,7 @@ body {
     margin: auto;
 }
 
-.block, .corner, .row, #begin, #spin, #points, #pointsTotal, #solvePuzzle {
+.block, .corner, .row, #begin, #spin, #points, #pointsTotal, #solvePuzzle, .topleft, .topright, .topcenter {
     display: inline-block;
 }
 
@@ -85,7 +89,7 @@ body {
     background: radial-gradient(circle, lime, darkgreen);
 }
 
-.block, .align {
+.block, .align, #solvePuzzle {
     vertical-align: middle;
 }
 
@@ -150,38 +154,44 @@ body {
     display: block;
 }
 
-.input, .modal, #description {
+.input, .modal, #description, #solveInput {
     border: 10px solid cyan;
 }
 
-.input, .modal, #description, #pointsTotal, #gameCounter, input, #solvePuzzle, input::placeholder {
-    color: rgb(255, 190, 55);
-}
-
-.input, .modal, #description {
+.gameInfo, .modal, #description, .input {
     max-width: 680px;
-    text-shadow: -10px 10px 20px black;
+    text-shadow: 6px 3px 8px black;
     background: radial-gradient(rgba(0, 0, 0, 0), forestgreen);
 }
 
-.modal, #begin, #spin, #points, #pointsTotal, #bank, #gameCounter, #solve, #solvePuzzle, input {
+.modal, #begin, #spin, #solvePuzzle {
     border-radius: 8px;
 }
 
 #description, .input {
     padding: 10px 0;
     font-size: 56px;
+    width: 100%;
 }
 
 .input {
     border-top: none;
 }
 
-#begin, #spin, #points, #bank, #solve {
+.input, .modal, #description, #bank, #gameCounter, input, #solvePuzzle, input::placeholder {
+    color: rgb(255, 190, 55);
+}
+
+#begin, #spin, #points, #pointsTotal, #solve {
     color: forestgreen;
     background-color: rgb(255, 190, 55);
 }
-#begin, #spin, #points, #gameCounter, #solve {
+
+#bank, #gameCounter, input, #solvePuzzle {
+    background-color: forestgreen;
+}
+
+#begin, #spin {
     border: 16px solid rgb(255, 190, 55);
 }
 
@@ -189,13 +199,11 @@ body {
     text-shadow: none;
 }
 
-#description, #begin, #spin, #points, #pointsTotal, #bank, #gameCounter {
+#description, #begin, #spin {
     margin: 10px auto 0;
 }
 
 #begin:active, #spin:active {
-    top: 2px;
-    left: 2px;
     border-bottom: 18px solid rgb(255, 190, 55);
     border-right: 18px solid rgb(255, 190, 55);
     margin: 10px auto -2px;
@@ -206,65 +214,57 @@ body {
     margin: 0 auto 10px;
 }
 
-#points, #pointsTotal, #bank, #gameCounter, #solve {
-    position: fixed;
-    top: 0;
+.topleft, .topright, .topcenter {
     z-index: 2;
-    min-width: 290px;
+    width: 33.33%;
+    font-size: 0;
+    height: 100%;
+    vertical-align: top;
 }
 
-#points, #gameCounter {
-    left: 0;
-    margin-left: 10px;
+.display {
+    width: 100%;
+    line-height: 100px;
+    height: 50%;
 }
 
-#pointsTotal, #gameCounter, input, #solvePuzzle {
-    background-color: forestgreen;
+.display div {
+    line-height: 50px;
 }
 
-#pointsTotal, #bank {
-    right: 0;
-    margin-right: 10px;
-    border: 16px solid forestgreen;
-}
-
-#bank, #gameCounter, #solve {
-    display: none;
-}
-
-#gameCounter, #solve, input {
+#gameCounter, .topcenter, input {
     font-size: 28px;
-    padding: 5px 0;
 }
 
-#solve {
-    left: 50%;
-    transform: translateX(-50%);
-    width: 300px;
-    height: 114px;
-    border: 8px solid rgb(255, 190, 55);
+#solveInput {
+    font-size: 30px;
 }
 
-input, #solvePuzzle {
-    width: 240px;
-    height: 40px;
-    border: 6px solid forestgreen;
+#solvePuzzle {
+    padding: 0 8px;
 }
 
-#solvePuzzle:active {
+#solvePuzzle, #begin, #spin {
+    box-shadow: 2px 2px 4px black;
+}
+
+#solvePuzzle:active, #begin:active, #spin:active {
     top: 2px;
     left: 2px;
+    box-shadow: none;
 }
 
 input {
     outline: none;
-    margin-bottom: 6px;
 }
 
 input::placeholder {
     opacity: 0.7;
 }
 
+nav {
+    height: 200px;
+}
 @media all and (max-width: 1214px) and (min-width: 1101px) {
     .block {
         width: 70px;
@@ -314,6 +314,10 @@ input::placeholder {
     .row {
         font-size: 55px;
     }
+
+    .display {
+        font-size: 48px;
+    }
 }
 
 @media all and (max-width: 900px) and (min-width: 801px) {
@@ -330,6 +334,10 @@ input::placeholder {
     
     .row {
         font-size: 47px;
+    }
+
+    .display {
+        font-size: 44px;
     }
 }
 
@@ -348,6 +356,14 @@ input::placeholder {
     .row {
         font-size: 42px;
     }
+
+    .display {
+        font-size: 40px;
+    }
+
+    #gameCounter, #solveInput {
+        font-size: 26px;
+    }
 }
 
 @media all and (max-width: 700px) and (min-width: 641px) {
@@ -364,6 +380,14 @@ input::placeholder {
     
     .row {
         font-size: 38px;
+    }
+
+    .display {
+        font-size: 32px;
+    }
+
+    #gameCounter, #solveInput {
+        font-size: 24px;
     }
 }
 
@@ -382,6 +406,14 @@ input::placeholder {
     .row {
         font-size: 34px;
     }
+
+    .display {
+        font-size: 32px;
+    }
+
+    #gameCounter, #solveInput {
+        font-size: 22px;
+    }
 }
 
 @media all and (max-width: 580px) and (min-width: 521px) {
@@ -398,6 +430,14 @@ input::placeholder {
     
     .row {
         font-size: 30px;
+    }
+
+    .display {
+        font-size: 32px;
+    }
+
+    #gameCounter, #solveInput {
+        font-size: 20px;
     }
 }
 
@@ -416,6 +456,14 @@ input::placeholder {
     .row {
         font-size: 28px;
     }
+
+    .display {
+        font-size: 32px;
+    }
+
+    #gameCounter, #solveInput {
+        font-size: 18px;
+    }
 }
 
 @media all and (max-width: 480px) and (min-width: 441px) {
@@ -432,6 +480,14 @@ input::placeholder {
     
     .row {
         font-size: 25px;
+    }
+
+    .display {
+        font-size: 32px;
+    }
+
+    #gameCounter, #solveInput {
+        font-size: 17px;
     }
 }
 
@@ -450,6 +506,14 @@ input::placeholder {
     .row {
         font-size: 21px;
     }
+
+    .display {
+        font-size: 32px;
+    }
+
+    #gameCounter, #solveInput {
+        font-size: 16px;
+    }
 }
 
 @media all and (max-width: 400px) and (min-width: 360px) {
@@ -467,6 +531,14 @@ input::placeholder {
     .row {
         font-size: 19px;
     }
+
+    .display {
+        font-size: 32px;
+    }
+
+    #gameCounter, #solveInput {
+        font-size: 14px;
+    }
 }
 
 @media all and (max-width: 359px) {
@@ -483,6 +555,18 @@ input::placeholder {
     
     .row {
         font-size: 16px;
+    }
+
+    .display {
+        font-size: 32px;
+    }
+
+    #gameCounter, #solveInput {
+        font-size: 12px;
+    }
+
+    #solvePuzzle {
+        padding: 0;
     }
 }
 
