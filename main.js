@@ -80,9 +80,10 @@ function gameOrder() {
 
 gameOrder();
 
-function solve(guess) {
+function solve(wordGuess) {
+    guess = false;
     if (tryToSolve) {
-        var solveGuess = guess
+        var solveGuess = wordGuess
         var x = solveGuess.length
         for (var i = 0; i < x; i++) {
             if (solveGuess[i] == ' ') {
@@ -154,7 +155,7 @@ $('#solvePuzzle').click(function() {
 });
 
 $('#input').click(function() {
-    $('#keyboard').slideDown();
+    $('#keyboard').slideToggle();
 });
 
 setTimeout(function() {
@@ -175,6 +176,7 @@ function message() {
         roundComplete.push(0);
     }
     cantSolve = true;
+    $('#keyboard').slideUp();
 }
 
 function winner() {
@@ -260,23 +262,20 @@ function begin() {
 }
 
 function spin() {
-    spinBoolean = false;
     $('#input').html('Guess Letter');
     if (!guess) {
         points = possiblePoints[Math.floor(Math.random()*possiblePoints.length)];
         if (points === 'BANKRUPT') {
-            spinBoolean = true;
             pointsTotal = 0;
             $('#pointsTotal').html('$0')
             $('#points').html('Bankrupt');
         } else {
             $('#points').html('$' + points);
-            $('#spin').fadeOut(400);
+            $('#spin').fadeOut();
             setTimeout(function() {
+                spinBoolean = false;
                 $('#input').slideDown();
-                setTimeout(function() {
                     guess = true;
-                },500);
             }, 500);
         }
     }
@@ -406,7 +405,6 @@ $('#M').click(function() {
     letter = 'M';
     startgame(letter);
 });
-
 
 function startgame(letter) {
     $('#input').html(letter);
