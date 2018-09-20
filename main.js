@@ -44,6 +44,7 @@ var spinBoolean = false;
 var wrongGuess = false;
 var cantSolve = true;
 var tryToSolve = false;
+var solveInputActive = false;
 
 $('.modal').hide();
 $('.game').hide();
@@ -137,6 +138,14 @@ $('#solve').mouseleave(function() {
     tryToSolve = false;
 });
 
+$('#solveInput').focus(function() {
+    solveInputActive = true;
+});
+
+$('#solveInput').blur(function() {
+    solveInputActive = false;
+});
+
 $('#solvePuzzle').click(function() {
     if (!cantSolve && $('#solveInput').val().length > 0) {
         solve($('#solveInput').val().toUpperCase().split(''));
@@ -216,6 +225,7 @@ function resetGame() {
     wrongGuess = false;
     cantSolve = true;
     tryToSolve = false;
+    $('#keyboard').slideUp();
     gameOrder();
     $('#bank').html('$' + bank);
     $('#points').html('$' + points);
@@ -263,7 +273,7 @@ function spin() {
             $('#points').html('$' + points);
             $('#spin').fadeOut(400);
             setTimeout(function() {
-                $('#input').fadeIn();
+                $('#input').slideDown();
                 setTimeout(function() {
                     guess = true;
                 },500);
@@ -273,7 +283,7 @@ function spin() {
 }
 
 document.addEventListener('keypress', function (event) {
-    if (!tryToSolve){
+    if (!tryToSolve && !solveInputActive){
         if (!guess) {
             letter = event.key.toUpperCase();
             if ((letter === 'B') && (beginBoolean === true)) {
@@ -427,7 +437,7 @@ function startgame(letter) {
     guess = false;
     if ((goToNextRound != gameWord.length) && (wrongGuesses < 10)) {
         setTimeout(function() {
-            $('#input').fadeOut();
+            $('#input').slideUp();
             setTimeout(function() {
                 setTimeout(function() {
                     spinBoolean = true;
@@ -498,4 +508,5 @@ setInterval(function() {
     var sec = date.getSeconds();
     var mil = date.getMilliseconds();
     $('.container').css({"background": "linear-gradient(to bottom, rgba(0, 0, 0, 0) 33%, hsl(" + ((sec + (0.001 * mil)) * 6) + ", 100%, 50%)"});
+    $('html').css({"background": "hsl(" + ((sec + (0.001 * mil)) * 6) + ", 100%, 50%)"});
 }, 250);
