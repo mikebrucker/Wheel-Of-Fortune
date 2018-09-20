@@ -53,6 +53,27 @@ $('.block').html("<img class='logo' src='images/logo.png' />");
 
 function logAnswers() {
     var puzzleLog = [];
+    console.log('Game Answers:');
+    console.log('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~');
+    for (var i = 0; i < 10; i++) {
+        puzzleLog.push(words[i][0].split(' '));
+        for (var j = 0; j < puzzleLog[i].length; j++){
+            if (1 > puzzleLog[i][j]) {
+                puzzleLog[i].splice(j, 1);
+                j--;
+            }
+        }
+        puzzleLog[i] = puzzleLog[i].join(' ');
+        console.log('Puzzle ' + (i + 1) + ': ' + puzzleLog[i]);
+    }
+    console.log('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~');
+    console.log('Call fullLogOfAnswers() For All Possible Games');
+}
+
+function fullLogOfAnswers() {
+    var puzzleLog = [];
+    console.log('Full List of Answers:')
+    console.log('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~');
     for (var i = 0; i < words.length; i++) {
         puzzleLog.push(words[i][0].split(' '));
         for (var j = 0; j < puzzleLog[i].length; j++){
