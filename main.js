@@ -36,6 +36,7 @@ var bank = 0;
 var wrongGuesses = 0;
 var roundComplete = [];
 var gameWord = [];
+var alphabet = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']
 var possiblePoints = ['BANKRUPT', 'BANKRUPT', 300, 350, 400, 450, 500, 500, 550, 600, 600, 650, 700, 700, 750, 800, 800, 850, 900, 900, 1000, 1500, 2000, 'BANKRUPT', 'BANKRUPT', 300, 350, 400, 450, 500, 500, 550, 600, 600, 650, 700, 700, 750, 800, 800, 850, 900, 1000, 1500, 2000, 2500, 'BANKRUPT', 'BANKRUPT', 300, 350, 400, 450, 500, 500, 550, 600, 600, 650, 700, 700, 750, 800, 800, 850, 900, 1000, 2000, 2500, 3500, 'BANKRUPT', 'BANKRUPT', 1000000];
 var guess = false;
 var beginBoolean = true;
@@ -80,7 +81,6 @@ gameOrder();
 
 function solve(guess) {
     if (tryToSolve) {
-        console.log(guess);
         var solveGuess = guess
         var x = solveGuess.length
         for (var i = 0; i < x; i++) {
@@ -138,13 +138,15 @@ $('#solve').mouseleave(function() {
 });
 
 $('#solvePuzzle').click(function() {
-    if (!cantSolve) {
+    if (!cantSolve && $('#solveInput').val().length > 0) {
         solve($('#solveInput').val().toUpperCase().split(''));
         $('#spin').fadeOut();
     }
 });
 
-$()
+$('#input').click(function() {
+    $('#keyboard').slideDown();
+});
 
 setTimeout(function() {
     message();
@@ -159,7 +161,7 @@ function message() {
     }, 401);
     $('#message').html("Wheel Of JavaScript");
     $('#round').html("Get Ready For Round " + (game + 1));
-    $('#input').val("Enter Any Key To Guess");
+    $('#input').html("Guess Letter");
     for (var i = 0; i < words[game][0].length; i++) {
         roundComplete.push(0);
     }
@@ -176,7 +178,7 @@ function winner() {
 
     $('#message').html("You Win Wheel of JavaScript!");
     $('#round').html("You Won $" + bank + "!<div>Would You Like To Play Again?</div>");
-    $('#input').val("Enter Any Key To Guess");
+    $('#input').html("Guess Letter");
     $('#gameCounter').html('<div>Game ' + game + '</div><div>Wrong Guesses ' + wrongGuesses + '</div>');
     for (var i = 0; i < words[game][0].length; i++) {
         roundComplete.push(0);
@@ -187,7 +189,7 @@ function winner() {
 function loser() {
     $('#message').html("You Lose!");
     $('#round').html("Would You Like To Play Again?");
-    $('#input').val("Enter Any Key To Guess");
+    $('#input').html("Guess Letter");
     roundComplete = [];
     for (var i = 0; i < words[game][0].length; i++) {
         roundComplete.push(0);   
@@ -249,7 +251,7 @@ function begin() {
 
 function spin() {
     spinBoolean = false;
-    $('#input').val('Enter Any Key To Guess');
+    $('#input').html('Guess Letter');
     if (!guess) {
         points = possiblePoints[Math.floor(Math.random()*possiblePoints.length)];
         if (points === 'BANKRUPT') {
@@ -282,17 +284,123 @@ document.addEventListener('keypress', function (event) {
             }
         }
         if (guess) {
-            $('#input').val('');
             letter = event.key.toUpperCase();
-            setTimeout(function() {
-                $('#input').val(letter);
-            }, 25);
-            startgame(letter);
+            if (alphabet.includes(letter)) {
+                startgame(letter);
+            }
         }
     }
 });
 
+$('#Q').click(function() {
+    letter = 'Q';
+    startgame(letter);
+});
+$('#W').click(function() {
+    letter = 'W';
+    startgame(letter);
+});
+$('#E').click(function() {
+    letter = 'E';
+    startgame(letter);
+});
+$('#R').click(function() {
+    letter = 'R';
+    startgame(letter);
+});
+$('#T').click(function() {
+    letter = 'T';
+    startgame(letter);
+});
+$('#Y').click(function() {
+    letter = 'Y';
+    startgame(letter);
+});
+$('#U').click(function() {
+    letter = 'U';
+    startgame(letter);
+});
+$('#I').click(function() {
+    letter = 'I';
+    startgame(letter);
+});
+$('#O').click(function() {
+    letter = 'O';
+    startgame(letter);
+});
+$('#P').click(function() {
+    letter = 'P';
+    startgame(letter);
+});
+$('#A').click(function() {
+    letter = 'A';
+    startgame(letter);
+});
+$('#S').click(function() {
+    letter = 'S';
+    startgame(letter);
+});
+$('#D').click(function() {
+    letter = 'D';
+    startgame(letter);
+});
+$('#F').click(function() {
+    letter = 'F';
+    startgame(letter);
+});
+$('#G').click(function() {
+    letter = 'G';
+    startgame(letter);
+});
+$('#H').click(function() {
+    letter = 'H';
+    startgame(letter);
+});
+$('#J').click(function() {
+    letter = 'J';
+    startgame(letter);
+});
+$('#K').click(function() {
+    letter = 'K';
+    startgame(letter);
+});
+$('#L').click(function() {
+    letter = 'L';
+    startgame(letter);
+});
+$('#Z').click(function() {
+    letter = 'Z';
+    startgame(letter);
+});
+$('#X').click(function() {
+    letter = 'X';
+    startgame(letter);
+});
+$('#C').click(function() {
+    letter = 'C';
+    startgame(letter);
+});
+$('#V').click(function() {
+    letter = 'V';
+    startgame(letter);
+});
+$('#B').click(function() {
+    letter = 'B';
+    startgame(letter);
+});
+$('#N').click(function() {
+    letter = 'N';
+    startgame(letter);
+});
+$('#M').click(function() {
+    letter = 'M';
+    startgame(letter);
+});
+
+
 function startgame(letter) {
+    $('#input').html(letter);
+    $('#keyboard').slideUp();
     wrongGuess = true;
     if (gameWord.includes(letter)) {
         for (var i = 0; i < gameWord.length; i++) {
@@ -325,7 +433,7 @@ function startgame(letter) {
                     spinBoolean = true;
                 }, 400);
                 $('#spin').fadeIn();
-                $('#input').val("Enter Any Key To Guess");
+                $('#input').html("Guess Letter");
             }, 400);
         }, 400);
     }
@@ -375,13 +483,8 @@ function nextRound() {
 
 function heightContainer() {
     browserHeight = parseInt(window.innerHeight);
-    if (browserHeight < 769) {
-        document.querySelector('body').style.minHeight = ('768px');
-        document.querySelector('.container').style.minHeight = ('768px');
-    } else {
-        document.querySelector('body').style.height = (browserHeight * 1.25 + 'px');
-        document.querySelector('.container').style.height = (browserHeight * 1.25 + 'px');
-    }
+    document.querySelector('body').style.minHeight = (browserHeight * 1.25 + 'px');
+    document.querySelector('.container').style.minHeight = (browserHeight * 1.25 + 'px');
 }
 
 $(window).resize(function() {
@@ -390,9 +493,9 @@ $(window).resize(function() {
 
 heightContainer();
 
-// setInterval(function(){
-//     var date = new Date();
-//     var sec = date.getSeconds();
-//     var mil = date.getMilliseconds();
-//     $('.container').css({"background": "linear-gradient(to bottom, rgba(0, 0, 0, 0) 33%, hsl(" + ((sec + (0.001 * mil)) * 6) + ", 100%, 50%)"});
-// }, 250);
+setInterval(function() {
+    var date = new Date();
+    var sec = date.getSeconds();
+    var mil = date.getMilliseconds();
+    $('.container').css({"background": "linear-gradient(to bottom, rgba(0, 0, 0, 0) 33%, hsl(" + ((sec + (0.001 * mil)) * 6) + ", 100%, 50%)"});
+}, 250);

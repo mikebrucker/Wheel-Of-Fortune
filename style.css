@@ -3,7 +3,7 @@
 }
 
 html {
-    background-color: black;
+    background-color: white;
 }
 
 body, #description, .gameInfo {
@@ -11,7 +11,7 @@ body, #description, .gameInfo {
 }
 
 body {
-    background: url(images/pool.jpg) no-repeat fixed top;
+    background: url(images/pool.jpg) repeat-y fixed top;
     background-size: 100%;
     width: 100%;
     font-family: Haettenschweiler, 'Arial Narrow Bold', sans-serif;
@@ -54,7 +54,7 @@ body, input  {
     margin: auto;
 }
 
-.block, .corner, .row, #begin, #spin, #points, #pointsTotal, #solvePuzzle, .topleft, .topright, .topcenter {
+.block, .corner, .row, #begin, #spin, #points, #pointsTotal, #solvePuzzle, .topleft, .topright, .topcenter, .key, .space {
     display: inline-block;
 }
 
@@ -66,7 +66,7 @@ body, input  {
     transform: scaleX(0.8);
 }
 
-.align, input, #solvePuzzle, .input, .modal, #description {
+.align, input, #solvePuzzle, .input, .modal, #description, #keyboard {
     font-weight: bold;
 }
 
@@ -150,7 +150,7 @@ body, input  {
     margin: 10px auto;
 }
 
-.input, .modal, .newLine, .mainImage {
+.input, .modal, .newLine, .mainImage, .keyrow {
     display: block;
 }
 
@@ -164,7 +164,7 @@ body, input  {
     background: radial-gradient(rgba(0, 0, 0, 0), forestgreen);
 }
 
-.modal, #begin, #spin, #solvePuzzle {
+.modal, #begin, #spin, #solvePuzzle, .key {
     border-radius: 8px;
 }
 
@@ -178,7 +178,7 @@ body, input  {
     border-top: none;
 }
 
-.input, .modal, #description, #bank, #gameCounter, input, #solvePuzzle, input::placeholder {
+.input, .modal, #description, #bank, #gameCounter, input, #solvePuzzle, input::placeholder, #keyboard {
     color: rgb(255, 190, 55);
 }
 
@@ -265,6 +265,34 @@ input::placeholder {
 nav {
     height: 200px;
 }
+
+.keyrow {
+    width: 100%;
+    margin: 6px auto;
+}
+
+.key {
+    height: 56px;
+    line-height: 56px;
+    font-size: 32px;
+    width: 9.1%;
+    background: radial-gradient(circle, forestgreen, rgba(34, 139, 34, 0.33));
+    border: 2px outset rgb(24, 24, 24);
+}
+
+#blankKey {
+    height: 0;
+    border: none;
+}
+
+.space {
+    width: 1%;
+}
+
+#keyboard {
+    display: none;
+}
+
 @media all and (max-width: 1214px) and (min-width: 1101px) {
     .block {
         width: 70px;
@@ -558,7 +586,7 @@ nav {
     }
 
     .display {
-        font-size: 32px;
+        font-size: 30px;
     }
 
     #gameCounter, #solveInput {
