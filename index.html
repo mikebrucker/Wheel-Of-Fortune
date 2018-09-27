@@ -15,20 +15,18 @@
 <body>
 <div class="container">
     <nav>
-        <div class="topleft">
-            <div class="display" id="points">$0</div>
-            <div class="display" id="gameCounter"><div>Game 1</div><div>Wrong Guesses 0</div></div>
-        </div>
+        <div class="display" id="bank">Bank: $0</div>
+        <div class="space"></div>
+        <div class="display" id="points">Spin: $0</div>
+        <div class="space"></div>
+        <div class="display" id="pointsTotal">Round: $0</div>
+        <div class="display" id="gameCounter"><div>Round: 1  ||  Wrong Guesses: 0</div></div>
         
-        <div class="topcenter" id="solve">
-            <input id="solveInput" type="text" class="display" placeholder="Solve The Puzzle">
-            <div class="display"><div id="solvePuzzle">SOLVE</div></div>
+        <div class="display" id="solve">
+            <input id="solveInput" type="text" placeholder="Solve The Puzzle">
+            <div id="solvePuzzle">SOLVE</div>
         </div>
 
-        <div class="topright">
-            <div class="display" id="pointsTotal">$0</div>
-            <div class="display" id="bank">$0</div>
-        </div>
     </nav>
 
     <div class="modal">
@@ -37,8 +35,7 @@
         <div class="info">10 Games Completed // You Win</div>
         <div class="info">10 Wrong Guesses Per Round // You Lose</div>
         <div class="info">Hot Keys: S for Spin // B for Begin</div>
-        <div class="info">Top Left is $pin // Top Right for Bank</div>
-        <div class="info">Top Center to Solve</div>
+        <div class="info">To Solve Puzzle Type Your Guess Into the Box and Click Solve</div>
         <div class="info">Click Enter Guess for Keyboard</div>
         <div class="button" id="begin">BEGIN</div>
     </div>
