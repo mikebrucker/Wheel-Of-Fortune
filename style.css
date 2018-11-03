@@ -159,12 +159,12 @@ body, input  {
 }
 
 .gameInfo, .modal, #description, .input {
-    max-width: 680px;
+    max-width: 672px;
     text-shadow: 6px 3px 8px black;
     background: radial-gradient(rgba(0, 0, 0, 0), forestgreen);
 }
 
-.modal, #begin, #spin, #solvePuzzle, .key, .display {
+.modal, #begin, #spin, #solvePuzzle, .key {
     border-radius: 8px;
 }
 
@@ -215,7 +215,7 @@ body, input  {
 }
 
 #points, #pointsTotal, #bank {
-    width: 32.66%
+    width: 33.333%
 }
 
 #solveInput {
@@ -255,7 +255,15 @@ input::placeholder {
     font-size: 28px;
     padding: 4px 0;
     border: 4px solid cyan;
-    margin-bottom: 4px;
+    border-bottom: none;
+}
+
+.display:last-of-type {
+    border-bottom: 4px solid cyan;
+}
+
+#bank, #points {
+    border-right: none;
 }
 
 nav {
@@ -511,6 +519,15 @@ nav {
 }
 
 @media all and (max-width: 800px) {
+    #description, #input {
+        border: 6px solid cyan;
+        font-size: 30px;
+    }
+
+    #solveInput, #solvePuzzle, .display {
+        font-size: 16px;
+    }
+
     .block {
         margin: 0 1px;
         border: 3px outset rgb(24, 24, 24);
