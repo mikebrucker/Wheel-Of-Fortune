@@ -519,6 +519,18 @@ nav {
 }
 
 @media all and (max-width: 800px) {
+    #message, #round {
+        font-size: 32px;
+    }
+
+    .button {
+        font-size: 40px;
+    }
+
+    .info {
+        font-size: 24px;
+    }
+
     #description, #input {
         border: 6px solid cyan;
         font-size: 30px;
